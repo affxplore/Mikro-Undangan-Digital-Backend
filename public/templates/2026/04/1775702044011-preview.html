@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8"/>
+<title>Undangan</title>
+<style>
+  :root{ --card-w:900px; --card-h:1600px; --s:1; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#f5f7fb;font-family:Inter,system-ui,Arial,sans-serif;overflow-x:hidden}
+  .stack{display:flex;flex-direction:column;align-items:center;gap:28px;padding:20px 0}
+  /* Bingkai responsif: di-scale oleh --s (di-set via JS) */
+  .frame{
+    width: calc(var(--card-w) * var(--s));
+    height: calc(var(--card-h) * var(--s));
+    position: relative; overflow:hidden; border-radius:28px;
+    box-shadow:0 10px 30px rgba(2,6,23,.08); background:#fff;
+  }
+  .card{
+    position:absolute; inset:0;
+    width:var(--card-w); height:var(--card-h);
+    transform:scale(var(--s)); transform-origin:top left;
+    border-radius:28px; overflow:hidden; background:#fff;
+  }
+  .pad{position:absolute;inset:0}
+</style>
+</head><body>
+<div class="stack">
+<div class="frame">
+    <div class="card" style="background-image:linear-gradient(180deg, #eef2ff, #ffffff);">
+      <div class="pad" style="padding:32px">
+        <div style="position:absolute;inset:0;"></div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// --- Fit ke lebar viewport, TANPA <meta viewport>, dan tanpa overflow horizontal ---
+(function(){
+  var CW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--card-w'));
+  function fit(){
+    var vw = document.documentElement.clientWidth || window.innerWidth || 980; // iOS default 980
+    var s = Math.min(1, vw / CW);
+    document.documentElement.style.setProperty('--s', String(s));
+  }
+  window.addEventListener('resize', fit, {passive:true});
+  fit();
+})();
+
+// --- Countdown updater ---
+(function(){
+  var els=document.querySelectorAll('[data-countdown]');
+  function tick(){
+    els.forEach(function(e){
+      var iso=e.getAttribute('data-target');
+      var target=new Date(iso).getTime(), now=Date.now();
+      var diff=Math.max(0,target-now), s=Math.floor(diff/1000),
+          d=Math.floor(s/86400), h=Math.floor((s%86400)/3600),
+          m=Math.floor((s%3600)/60), ss=s%60;
+      var z=n=>('0'+n).slice(-2);
+      var set=function(k,v){ var n=e.querySelector('[data-cd="'+k+'"]'); if(n) n.textContent=v; };
+      set('d', d); set('h', z(h)); set('m', z(m)); set('s', z(ss));
+    });
+  }
+  setInterval(tick,1000); tick();
+})();
+</script>
+</body></html>

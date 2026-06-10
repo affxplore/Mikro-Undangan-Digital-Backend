@@ -1,0 +1,69 @@
+{
+    "cover": {
+        "type": "christmas",
+        "data": {
+            "bgType": "gradient",
+            "backgroundColor": "#ffffff",
+            "preTitle": "Merry Christmas",
+            "brideName": "",
+            "groomName": "",
+            "date": "",
+            "salutation": "Kepada Yth.",
+            "guestPlaceholder": "Nama Tamu",
+            "primaryColor": "#B91C1C",
+            "secondaryColor": "#F3F4F6",
+            "textColor": "#1F2937",
+            "fontFamily": "ui-serif, Georgia",
+            "backgroundImage": null,
+            "decorationImage": null
+        },
+        "schema": [
+            {
+                "type": "select",
+                "path": "bgType",
+                "label": "Tipe Latar",
+                "options": [
+                    {
+                        "value": "solid",
+                        "label": "Solid"
+                    },
+                    {
+                        "value": "gradient",
+                        "label": "Gradient"
+                    }
+                ],
+                "default": "gradient"
+            },
+            {
+                "type": "color",
+                "path": "primaryColor",
+                "label": "Warna Utama",
+                "default": "#B91C1C"
+            },
+            {
+                "type": "text",
+                "path": "preTitle",
+                "label": "Teks Pembuka",
+                "default": "Merry Christmas"
+            }
+        ],
+        "card": {
+            "bgType": "gradient",
+            "gradient": {
+                "from": "#f8fafc",
+                "to": "#ffffff"
+            },
+            "color": "#ffffff",
+            "radius": 24,
+            "padding": 32
+        },
+        "music": {
+            "src": null,
+            "autoplay": false,
+            "loop": true,
+            "volume": 0.4
+        },
+        "elements": []
+    },
+    "pages": []
+}
